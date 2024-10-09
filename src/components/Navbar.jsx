@@ -89,7 +89,7 @@ function Navbar() {
          transform   transition-transform duration-300 ease-in 
             ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}`}
         >
-          <div className="text-xl" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <div className="text-2xl" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             X
           </div>
 
@@ -106,7 +106,7 @@ function Navbar() {
           </form>
       
           </div>
-          <ul className="flex mt-2 flex-col font-nunito lg:hidden lg:justify-center  lg:items-center gap-2 lg:text-lg font-semibold">
+          <ul className="flex mt-2 flex-col font-nunito lg:hidden lg:justify-center  lg:items-center gap-2 text-lg font-semibold">
             {navItemsData.map((item, index) => {
               return (
                 <NavLink  to={`/category/${item.label}`} key={item.label} onClick={()=> setIsMenuOpen(!isMenuOpen)}>

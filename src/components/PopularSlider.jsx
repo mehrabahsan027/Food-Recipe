@@ -11,12 +11,14 @@ function PopularSlider({ isMenuOpen }) {
   );
 
   var settings = {
+  
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    arrow:true,
     responsive: [
       {
         breakpoint: 600,
@@ -52,9 +54,9 @@ function PopularSlider({ isMenuOpen }) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <section className=" w-10/12  py-8 mx-auto  ">
+    <section className=" container xl:w-10/12  py-8 mx-auto overflow-x-hidden xl:overflow-x-visible ">
       <h1 className="text-3xl text-center -mt-5">Popular Cuisines</h1>
-      <Slider {...settings}>
+      <Slider {...settings} >
         {data &&
           data.length > 0 &&
           data.map((item) => {
