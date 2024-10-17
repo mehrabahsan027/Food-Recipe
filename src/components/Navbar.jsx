@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { RiMenuFill } from "react-icons/ri";
-import {NavLink,useNavigate} from 'react-router-dom'
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 const navItemsData = [
   {
@@ -24,56 +26,83 @@ const navItemsData = [
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navigate = useNavigate()
-  const [input ,setInput] = useState('')
+  const navigate = useNavigate();
+  const [input, setInput] = useState("");
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    if(input !== ''){
-      navigate( `/search/${input}`)
+    if (input !== "") {
+      navigate(`/search/${input}`);
     }
-  
+  };
 
-  }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+      delayChildren:0.3,
+     
+        staggerChildren: 0.2, // Staggers child animations by 0.3 seconds
+      },
+    },
+  };
+  
+  const itemVariants = {
+    hidden: { scale:0 },
+    visible: { scale:1 },
+  };
   return (
     <>
       <nav className="container  shadow-sm shadow-yellow-50 z-10 sticky top-0  mx-auto px-8 py-6 flex justify-between items-center ">
         {/* Logo */}
         <div className="text-2xl lg:text-3xl">
-          <h1 className="font-playfair "> <NavLink to={'/'}>
-          Logo</NavLink> </h1>
+          <h1 className="font-playfair ">
+           
+            <NavLink to={"/"}>Logo</NavLink>
+          </h1>
         </div>
         {/* Search */}
         <div className="px-8 lg:w-full hidden text-black lg:block">
           <form onSubmit={handleSubmit} className="flex w-full gap-x-2">
-          <input
-          onChange={(e)=> setInput(e.target.value)}
-            type="text"
-            placeholder="Search.."
-            className="px-8 py-2 rounded-xl w-full"
-          />
-          <button onClick={handleSubmit} className="bg-black font-nunito font-semibold text-teal-50 px-5 hover:bg-slate-800 py-2 border border-yellow-200">Search</button>
+            <input
+              onChange={(e) => setInput(e.target.value)}
+              type="text"
+              placeholder="Search.."
+              className="px-8 py-2 rounded-xl w-full"
+            />
+            <button
+              onClick={handleSubmit}
+              className="bg-black font-nunito font-semibold text-teal-50 px-5 hover:bg-slate-800 py-2 border border-yellow-200"
+            >
+              Search
+            </button>
           </form>
-      
         </div>
 
         {/* region */}
-        <ul className="hidden lg:flex font-nunito font-semibold  items-center xl:gap-6 xl:text-lg h-full ">
+        <motion.ul 
+           variants={containerVariants}
+           initial="hidden"
+           animate="visible"
+        
+        className="hidden lg:flex font-nunito font-semibold  items-center xl:gap-6 xl:text-lg h-full ">
           {navItemsData.map((item, index) => {
             return (
               <NavLink to={`/category/${item.label}`} key={item.label}>
-                  <li
-                key={index}
-                className="hover:bg-white  cursor-pointer hover:text-black px-5 py-3 duration-200"
-              >
-                {item.label}
-              </li>
+                <motion.li
+                  key={index}
+                  variants={itemVariants}
+                  
+                  className="hover:bg-white  cursor-pointer hover:text-black px-5 py-3 duration-200"
+                >
+                  {item.label}
+                </motion.li>
               </NavLink>
-            
             );
           })}
-        </ul>
+        </motion.ul>
 
         {/* mobile menu */}
         <RiMenuFill
@@ -94,23 +123,35 @@ function Navbar() {
           </div>
 
           <div className=" mt-5 text-black px-5 w-full">
-          <form onSubmit={handleSubmit} className="flex flex-col w-full gap-y-2 ">
-          <input
-          required
-          onChange={(e)=> setInput(e.target.value)}
-            type="text"
-            placeholder="Search.."
-            className="px-8 py-2 rounded-xl w-full"
-          />
-          <button onClick={()=> {handleSubmit ,setIsMenuOpen(!isMenuOpen)}} className="bg-black text-teal-50 px-5 py-2 border border-yellow-50">Search</button>
-          </form>
-      
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full gap-y-2 "
+            >
+              <input
+                required
+                onChange={(e) => setInput(e.target.value)}
+                type="text"
+                placeholder="Search.."
+                className="px-8 py-2 rounded-xl w-full"
+              />
+              <button
+                onClick={() => {
+                  handleSubmit, setIsMenuOpen(!isMenuOpen);
+                }}
+                className="bg-black text-teal-50 px-5 py-2 border border-yellow-50"
+              >
+                Search
+              </button>
+            </form>
           </div>
           <ul className="flex mt-2 flex-col font-nunito lg:hidden lg:justify-center  lg:items-center gap-2 text-lg font-semibold">
             {navItemsData.map((item, index) => {
               return (
-                <NavLink  to={`/category/${item.label}`} key={item.label} onClick={()=> setIsMenuOpen(!isMenuOpen)}>
-
+                <NavLink
+                  to={`/category/${item.label}`}
+                  key={item.label}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   <li
                     key={index}
                     className="px-5 py-3 cursor-pointer duration-200"

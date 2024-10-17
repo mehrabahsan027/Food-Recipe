@@ -1,10 +1,18 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 
 
+
+
 function Card({item}) {
   return (
-    <div class="w-full hover:scale-110 duration-300 shadow-md shadow-yellow-600 rounded flex flex-col items-center  overflow-hidden lg:h-auto    ">
+    <motion.div
+    initial={{opacity:0,y:20}}
+    whileInView={{opacity:1,y:0,transition:{duration:0.5}}}
+    viewport={{once:true}}
+    
+    class="w-full hover:scale-110 duration-300 shadow-md shadow-yellow-600 rounded flex flex-col items-center  overflow-hidden lg:h-auto    ">
       <img
         class="w-full h-56 object-cover"
         src={item.strMealThumb}
@@ -15,7 +23,7 @@ function Card({item}) {
           {item.strMeal}
         </h2>
       </Link>
-    </div>
+    </motion.div>
   );
 }
 

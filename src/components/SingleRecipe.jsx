@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import TrendingSlider from "./TrendingSlider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
+
 
 function SingleRecipe() {
   const { idMeal } = useParams();
@@ -61,17 +63,30 @@ function SingleRecipe() {
       <Navbar />
 
       <section className="container mx-auto py-3 lg:py-10 flex flex-col lg:flex-row justify-center  items-center lg:gap-16">
-        <div className="max-w-1/2 h-96 border border-yellow-500 shadow-md rounded-xl shadow-yellow-100">
+        <motion.div 
+
+        initial={{opacity:0}}
+        animate={{opacity:1,transition:{duration:0.5}}}
+        
+        className="max-w-1/2 h-96 border border-yellow-500 shadow-md rounded-xl shadow-yellow-100">
           <img
             src={data.strMealThumb}
             className="w-full h-full rounded-xl object-cover"
           />
-        </div>
-        <h2 className="text-2xl pt-3 lg:text-4xl mb-5 lg:mb-0 font-semibold font-playfair">
+        </motion.div>
+        <motion.h2 
+        initial={{opacity:0}}
+        animate={{opacity:1,transition:{delay:'0.5',duration:1}}}
+        className="text-2xl pt-3 lg:text-4xl mb-5 lg:mb-0 font-semibold font-playfair">
           {data.strMeal}
-        </h2>
+        </motion.h2>
 
-        <div>
+        <motion.div
+         initial={{opacity:0, y:20}}
+         animate={{ opacity:1,y:0,transition:{delay:0.7}}}
+        
+        >
+         
           <h3 className="text-2xl lg:text-3xl mb-3 font-nunito">Ingredients</h3>
           <div className="space-y-3 font-nunito text-center">
             <p className="text-lg">{data.strIngredient1}</p>
@@ -83,7 +98,7 @@ function SingleRecipe() {
             <p className="text-lg">{data.strIngredient7}</p>
             <p className="text-lg">{data.strIngredient8}</p>
           </div>
-        </div>
+        </motion.div>
       </section>
       <div className="px-8">
         <h3 className="text-2xl pb-2 lg:text-3xl font-nunito text-center">
