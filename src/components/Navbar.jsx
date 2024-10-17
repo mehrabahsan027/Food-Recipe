@@ -53,6 +53,8 @@ function Navbar() {
     hidden: { scale:0 },
     visible: { scale:1 },
   };
+
+  
   return (
     <>
       <nav className="container  shadow-sm shadow-yellow-50 z-10 sticky top-0  mx-auto px-8 py-6 flex justify-between items-center ">
@@ -144,7 +146,9 @@ function Navbar() {
               </button>
             </form>
           </div>
-          <ul className="flex mt-2 flex-col font-nunito lg:hidden lg:justify-center  lg:items-center gap-2 text-lg font-semibold">
+          <ul 
+           
+          className="flex mt-2 flex-col font-nunito lg:hidden lg:justify-center  lg:items-center gap-2 text-lg font-semibold">
             {navItemsData.map((item, index) => {
               return (
                 <NavLink
@@ -153,6 +157,7 @@ function Navbar() {
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                   <li
+                
                     key={index}
                     className="px-5 py-3 cursor-pointer duration-200"
                   >
