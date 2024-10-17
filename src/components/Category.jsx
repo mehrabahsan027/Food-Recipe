@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Card from "./Card";
+import { motion } from "framer-motion";
+
 
 function Category() {
   const { area } = useParams();
@@ -59,13 +61,17 @@ function Category() {
       <h1 className="text-3xl text-center mt-3 font-playfair">
         {area} Food Items
       </h1>
-      <section className=" w-10/12 my-8 justify-center gap-16 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <motion.section
+      initial={{opacity:0}}
+      animate={{opacity:1, transition:{type:'spring'}}}
+      
+      className=" w-10/12 my-8 justify-center gap-16 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data &&
           data.length > 0 &&
           data.map((item) => {
-            return <Card item={item} />;
+            return <Card key={item.idMeal} item={item} />;
           })}
-      </section>
+      </motion.section>
     </>
   );
 }

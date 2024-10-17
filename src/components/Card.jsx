@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 function Card({item}) {
   return (
     <motion.div
-    initial={{opacity:0,y:20}}
-    whileInView={{opacity:1,y:0,transition:{duration:0.3}}}
+    initial={{y:20}}
+    whileInView={{y:0,transition:{duration:0.3}}}
     viewport={{once:true}}
     
     class="w-full hover:scale-110 duration-300 shadow-md shadow-yellow-600 rounded flex flex-col items-center  overflow-hidden lg:h-auto    ">
